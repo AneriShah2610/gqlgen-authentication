@@ -1,0 +1,47 @@
+type Job{
+    id: ID!
+    name: String!
+    description: String!
+    joinLocation: String!
+    createdBy: User!
+}
+type User{
+    id: ID!
+    name: String!
+    email: String!
+}
+type Application{
+    id: ID!
+    name: String!
+    email: String!
+    contactno: String!
+    job: Job!
+}
+input NewJob{
+    name: String!
+    description: String!
+    joinLocation: String!
+    createdByID: String!
+}
+input NewApplication{
+    name: String!
+    email: String!
+    contactno: String!
+    jobID: String!
+}
+input UpdateJob{
+    name: String!
+    description: String!
+    joinLocation: String!
+}
+type Mutation{
+    createJob(input: NewJob!): Job!
+    deleteJob(id: ID!): String!
+    updateJob(id: ID!,input: UpdateJob!): Job!
+    createApplication(input: NewApplication!): Application!
+    deleteApplication(id: ID!): String!
+}
+type Query {
+    jobs: [Job!]!
+    applications(jobID: ID!): [Application!]!
+}
